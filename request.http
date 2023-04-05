@@ -6,7 +6,7 @@ Content-Type: application/json
 {
     "first_name": "hyein",
     "last_name": "kim",
-    "email": "ss2019hi@hanmail.net",
+    "email": "ss@hanmail.net",
     "password": "123456",
     "bYear": "1998",
     "bMonth": "4",
