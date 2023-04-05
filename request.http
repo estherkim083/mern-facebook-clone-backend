@@ -1,0 +1,39 @@
+### register user
+
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+    "first_name": "hyein",
+    "last_name": "kim",
+    "email": "ss2019hi@hanmail.net",
+    "password": "123456",
+    "bYear": "1998",
+    "bMonth": "4",
+    "bDay": "30",
+    "gender": "female",
+    "username": "khi"
+
+}
+### login user
+
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email": "fiviri9059@loongwin.com",
+    "password": "123456"
+}
+
+### activate email
+
+POST http://localhost:8000/activate
+Content-Type: application/json
+
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTkyYjI5NWQ0ODZmYzBmYzBlODdkOSIsImlhdCI6MTY3OTM3MTA0OSwiZXhwIjoxNjc5MzcyODQ5fQ.BOmBQREK9I5_lmRFVOvbCu3YNi6hMGxCqPJm23U2NAw"
+}
+### auth user
+POST http://localhost:8000/auth
+Authorization: Bearer xxx
