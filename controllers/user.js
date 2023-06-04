@@ -85,7 +85,7 @@ exports.sendverification = async (req, res) => {
     }
     const emailVerificationToken = generateToken(
       { id: user._id.toString() },
-      "30m"
+      "3d"
     );
     const url = `${process.env.BASE_URL}/activate?token=${emailVerificationToken}`;
     sendVerificationEmail(user.email, user.first_name, url);
