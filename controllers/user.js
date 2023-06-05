@@ -10,6 +10,22 @@ const { generateCode } = require("../helpers/generateCode");
 const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const jwt = require("jsonwebtoken");
 const { Code } = require("../models/Code");
+const { Post } = require("../models/Post");
+
+exports.getProfile = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const profile = await User.findOne({ username }).select("-password");
+    if (!profile) {
+      return res.json({ ok: false });
+    }
+    const posts = await Post.find({ user: profile._id }).populate("user");
+
+    res.json({ ...profile.toObject(), posts });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 exports.changePassword = async (req, res) => {
   try {
     const { email, password } = req.body;

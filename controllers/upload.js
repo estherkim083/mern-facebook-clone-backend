@@ -46,3 +46,21 @@ exports.uploadImages = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+exports.listImages = async (req, res) => {
+  try {
+    const { path, sort, max } = res.body;
+    cloudinary.v2.search
+      .expression(`${path}`)
+      .sort("public_id", `${sort}`)
+      .max_results(max)
+      .execute()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err.error.message);
+      });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
