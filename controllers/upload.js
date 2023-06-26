@@ -48,10 +48,10 @@ exports.uploadImages = async (req, res) => {
 };
 exports.listImages = async (req, res) => {
   try {
-    const { path, sort, max } = res.body;
+    const { path, sort, max } = req.body;
     cloudinary.v2.search
       .expression(`${path}`)
-      .sort("public_id", `${sort}`)
+      .sort_by("created_at", `${sort}`)
       .max_results(max)
       .execute()
       .then((result) => {
@@ -61,6 +61,7 @@ exports.listImages = async (req, res) => {
         console.log(err.error.message);
       });
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json({ message: err.message });
   }
 };

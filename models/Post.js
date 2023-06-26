@@ -24,7 +24,7 @@ const postSchema = new mongoose.Schema(
     },
     comments: [
       {
-        comments: {
+        comment: {
           type: String,
         },
         image: {

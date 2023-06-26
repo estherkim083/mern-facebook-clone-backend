@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const { ObjectId } = mongoose.Schema;
 
 const userSchema = mongoose.Schema(
@@ -17,11 +18,12 @@ const userSchema = mongoose.Schema(
     },
     username: {
       type: String,
-      required: [true, "User Name is required"],
+      required: [true, "username is required"],
       trim: true,
       text: true,
       unique: true,
     },
+
     email: {
       type: String,
       required: [true, "email is required"],
@@ -33,7 +35,9 @@ const userSchema = mongoose.Schema(
     },
     picture: {
       type: String,
-      default: "/public/images/user.png",
+      trim: true,
+      default:
+        "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png",
     },
     cover: {
       type: String,
@@ -63,27 +67,40 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    friends: {
-      type: Array,
-      default: [],
-    },
-    followers: {
-      type: Array,
-      default: [],
-    },
-    followings: {
-      type: Array,
-      default: [],
-    },
-    requests: {
-      type: Array,
-      default: [],
-    },
+    friends: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    followers: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    requests: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
     search: [
       {
         user: {
           type: ObjectId,
           ref: "User",
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          required: true,
         },
       },
     ],
@@ -100,7 +117,7 @@ const userSchema = mongoose.Schema(
       workplace: {
         type: String,
       },
-      highschool: {
+      highSchool: {
         type: String,
       },
       college: {
@@ -109,12 +126,12 @@ const userSchema = mongoose.Schema(
       currentCity: {
         type: String,
       },
-      homeTown: {
+      hometown: {
         type: String,
       },
       relationship: {
         type: String,
-        enum: ["Single", "In a relationship", "married", "divorced"],
+        enum: ["Single", "In a relationship", "Married", "Divorced"],
       },
       instagram: {
         type: String,
@@ -128,7 +145,7 @@ const userSchema = mongoose.Schema(
         },
         savedAt: {
           type: Date,
-          default: new Date(),
+          required: true,
         },
       },
     ],
